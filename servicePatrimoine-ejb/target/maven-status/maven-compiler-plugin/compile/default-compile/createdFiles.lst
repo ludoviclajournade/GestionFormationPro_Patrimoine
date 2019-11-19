@@ -1,0 +1,8 @@
+facades\planningFacadeLocal.class
+metier\gestionPatrimoine.class
+services\ServicePatrimoine.class
+services\ServicePatrimoineLocal.class
+facades\AbstractFacade.class
+facades\planningFacade.class
+metier\gestionPatrimoineLocal.class
+entitie\planning.class
