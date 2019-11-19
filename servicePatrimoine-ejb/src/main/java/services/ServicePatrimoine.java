@@ -5,7 +5,7 @@
  */
 package services;
 
-import metier.gestionPatrimoine;
+//import metier.gestionPatrimoine;
 import com.google.gson.Gson;
 import com.google.gson.JsonSyntaxException;
 import entitie.planning;
@@ -14,6 +14,7 @@ import java.util.logging.Logger;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.xml.soap.SOAPException;
+import metier.gestionPatrimoineLocal;
 
 /**
  *
@@ -26,7 +27,7 @@ public class ServicePatrimoine implements ServicePatrimoineLocal {
     // "Insert Code > Add Business Method")
     
     @EJB
-    private gestionPatrimoine gestionpatrimoine;
+    private gestionPatrimoineLocal gestionpatrimoine;
     /**
      * Convertisseur Objet JSON et inversement)
      */

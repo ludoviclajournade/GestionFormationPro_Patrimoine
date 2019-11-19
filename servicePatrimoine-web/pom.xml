@@ -27,10 +27,10 @@
             <type>jar</type>
         </dependency>
         <dependency>
-            <groupId>miagePatrimoine</groupId>
+            <groupId>${project.groupId}</groupId>
             <artifactId>servicePatrimoine-ejb</artifactId>
-            <version>1.0-SNAPSHOT</version>
-            <type>jar</type>
+            <version>${project.version}</version>
+            <scope>provided</scope>
         </dependency>
         <dependency>
             <groupId>javax</groupId>
