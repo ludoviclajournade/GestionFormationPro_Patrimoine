@@ -41,23 +41,37 @@ public class ServicePatrimoine implements ServicePatrimoineLocal {
     }
     
     @Override
-    public String ajouterSalle(long id_sal) throws SOAPException{
+    public String ajouterSalle(String id_sal){
         
-        this.gestionpatrimoine.ajouterSalle(id_sal);
-        return this.gson.toJson("bien ajouté");
-       
+        
+        return this.gestionpatrimoine.ajouterSalle(id_sal);
+   
     }
     @Override
-    public String changerStatut(long id_Sal, String statut) throws SOAPException {
+    public String changerStatut(String content){
       
-            this.gestionpatrimoine.SupprimerRes(id_Sal);
-            return this.gson.toJson("bien supprimé");
+      
+        return this.gestionpatrimoine.changerStatut(content);
+        
+
 
     }
     
     @Override
-    public String SupprimerRes(long id_Sal,String statut) throws SOAPException {
-        this.gestionpatrimoine.changerStatut(id_Sal,statut);
-        return this.gson.toJson("Statut modifié");
+    public String SupprimerRes(String id_Sal) {
+       
+        System.out.print("coucou 2" + id_Sal);
+        return this.gestionpatrimoine.SupprimerRes(id_Sal);
+        
+    
+    }
+    
+     @Override
+    public String RenvoisPlan() {
+       
+        //System.out.print("coucou 2" + id_Sal);
+        return this.gestionpatrimoine.RenvoisPlan();
+        
+    
     }
 }

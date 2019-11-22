@@ -52,14 +52,14 @@ public class PatrimoineResource {
      * @return an instance of java.lang.String
      */
     @GET
-    @Produces(MediaType.APPLICATION_JSON)
-    public String getJson() throws SOAPException {
+    //@Produces(MediaType.APPLICATION_JSON)
+    public String getJson(String id)  {
+        System.out.print(id);
         //TODO return proper representation object
         //throw new UnsupportedOperationException();
         //return Response.status(Response.Status.NOT_FOUND).build();
         
-        return "test";
-        
+        return patri.RenvoisPlan();
     }
 
     /**
@@ -68,23 +68,43 @@ public class PatrimoineResource {
      */
     @PUT
     @Consumes(MediaType.APPLICATION_JSON)
-    public Response putJson(int content) throws SOAPException {
+    public String putJson(String content) {
        // long id_sal;
    
        //planning p = gson.fromJson(content, planning.class)
-        return Response.ok(gson.toJson(patri.ajouterSalle(content))).build();
+        //return Response.ok(gson.toJson(patri.ajouterSalle(content))).build();
+        return "testOK";
     }
     
   
+    
+    //@Path("/post")
+    
     //@Consumes(MediaType.APPLICATION_JSON)
     //@Produces(MediaType.APPLICATION_JSON)
     //@Path("/post")
+    //@PathParam("id") String id
     @POST
-    public Response AjouterSalle(@PathParam("id") long id) throws SOAPException {
-        return Response.ok(gson.toJson(patri.ajouterSalle(id))).build();
-        //return "coucou";
+    public String AjouterSalle(String id) {
+        //return Response.ok(gson.toJson(patri.ajouterSalle(id))).build();
+        System.out.print(id);
+        return patri.ajouterSalle(id) ;        
     }
-    
+    /*
+    @POST
+    public String SupprimerRes(String id) {
+        //return Response.ok(gson.toJson(patri.ajouterSalle(id))).build();
+        System.out.print(id);
+        return patri.SupprimerRes(id);
+    }
+   
+    @POST
+    public String changerStatut(String id, String statut) {
+        //return Response.ok(gson.toJson(patri.ajouterSalle(id))).build();
+        System.out.print(id);
+        return patri.changerStatut(id, statut);
+    }
+    */
     private ServicePatrimoineLocal lookupServicesBourseLocal() {
         try {
             javax.naming.Context c = new InitialContext();

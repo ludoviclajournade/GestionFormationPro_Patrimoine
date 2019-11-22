@@ -15,9 +15,12 @@ import javax.xml.soap.SOAPException;
 @Local
 public interface gestionPatrimoineLocal {
     
-    void ajouterSalle(long id_Sal) throws SOAPException;
+    public String ajouterSalle(String id_Sal) ;
     
-    public void changerStatut(long id_Sal, String statut) throws SOAPException ;
+    public String changerStatut(String content);
     
-    public void SupprimerRes(long id_Sal) throws SOAPException;
+    public String SupprimerRes(String id_Sal) ;
+    
+    public String RenvoisPlan();
+    
 }

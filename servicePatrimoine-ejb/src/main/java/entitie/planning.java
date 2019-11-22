@@ -5,30 +5,37 @@
  */
 package entitie;
 
-import java.io.Serializable;
 import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 
 /**
  *
  * @author alban
  */
-@Entity
-public class planning implements Serializable {
+public class planning {
 
-    private static final long serialVersionUID = 1L;
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
-    @Column(nullable = false)
+    @Override
+    public String toString() {
+        return "planning{" + "id=" + id + ", statut=" + statut + ", dateDeb=" + dateDeb + ", dateFin=" + dateFin + '}';
+    }
+        
+    private String id;
     private String statut;
-    @Column(nullable = false)
     private String dateDeb;
-    @Column(nullable = false)
     private String dateFin;
+
+    public planning(String id, String statut, String dateDeb, String dateFin) {
+        this.id = id;
+        this.statut = statut;
+        this.dateDeb = dateDeb;
+        this.dateFin = dateFin;
+    }
+
+   
+    
+
+    public void setId(String id) {
+        this.id = id;
+    }
 
     public void setStatut(String statut) {
         this.statut = statut;
@@ -43,10 +50,8 @@ public class planning implements Serializable {
     }
 
     
-    
-    
-    public static long getSerialVersionUID() {
-        return serialVersionUID;
+    public String getId() {
+        return id;
     }
 
     public String getStatut() {
@@ -60,48 +65,6 @@ public class planning implements Serializable {
     public String getDateFin() {
         return dateFin;
     }
-   
     
-    
-    
-    public planning(long id) {
-        this.id = id;
-        statut = "libre";
-        dateDeb = "";
-        dateFin = "";        
-    }
-    
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    @Override
-    public int hashCode() {
-        int hash = 0;
-        hash += (id != null ? id.hashCode() : 0);
-        return hash;
-    }
-
-    @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof planning)) {
-            return false;
-        }
-        planning other = (planning) object;
-        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
-            return false;
-        }
-        return true;
-    }
-
-    @Override
-    public String toString() {
-        return "entities.planning[ id=" + id + " ]";
-    }
     
 }

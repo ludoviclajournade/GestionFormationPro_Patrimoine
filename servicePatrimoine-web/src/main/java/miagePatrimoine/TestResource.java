@@ -53,4 +53,6 @@ public class TestResource {
     @Consumes(MediaType.APPLICATION_XML)
     public void putXml(String content) {
     }
+    
+    
 }
