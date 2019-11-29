@@ -1,5 +1,6 @@
 metier\gestionPatrimoine.class
 services\ServicePatrimoine.class
+entitie\Salle.class
 services\ServicePatrimoineLocal.class
 metier\gestionPatrimoineLocal.class
 entitie\planning.class

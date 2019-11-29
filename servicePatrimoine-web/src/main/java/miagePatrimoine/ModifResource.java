@@ -51,9 +51,9 @@ public class ModifResource {
     //@Produces(MediaType.APPLICATION_JSON)
     
     @GET
-    public String getJson(String test) {
+    public String getJson() {
         //TODO return proper representation object
-        return test;
+        return "test";
     }
 
     /**

@@ -63,10 +63,10 @@ public class SupprimerResource {
     }
     
     @POST
-    public String SupprimerRes(String id) {
+    public String SupprimerRes(String content) {
         //return Response.ok(gson.toJson(patri.ajouterSalle(id))).build();
-        System.out.print("coucou 1" + id);
-        return patri.SupprimerRes(id);
+        System.out.print("coucou 1" + content);
+        return patri.SupprimerSallePlan(0);
     }
     
      private ServicePatrimoineLocal lookupServicesBourseLocal() {

@@ -41,37 +41,38 @@ public class ServicePatrimoine implements ServicePatrimoineLocal {
     }
     
     @Override
-    public String ajouterSalle(String id_sal){
-        
-        
-        return this.gestionpatrimoine.ajouterSalle(id_sal);
-   
+    public String ajouterSalle(String content){
+        return this.gestionpatrimoine.ajouterSalle(content);
     }
     @Override
+    public String ajouterSallePan(String content){
+        return this.gestionpatrimoine.ajouterSallePan(content);
+    }
+    
+    @Override
     public String changerStatut(String content){
-      
-      
         return this.gestionpatrimoine.changerStatut(content);
-        
-
-
     }
     
     @Override
-    public String SupprimerRes(String id_Sal) {
-       
-        System.out.print("coucou 2" + id_Sal);
-        return this.gestionpatrimoine.SupprimerRes(id_Sal);
-        
-    
+    public String SupprimerSalle(int id){
+        return this.gestionpatrimoine.SupprimerSalle(id);
     }
     
-     @Override
+    @Override
+    public String SupprimerSallePlan(int id){
+        return this.gestionpatrimoine.SupprimerSallePlan(id);
+    }
+    
+    @Override
     public String RenvoisPlan() {
-       
-        //System.out.print("coucou 2" + id_Sal);
         return this.gestionpatrimoine.RenvoisPlan();
-        
-    
     }
+    
+    @Override
+    public String RenvoisSalle(){
+        return this.gestionpatrimoine.RenvoisSalle();
+    }
+    
+    
 }

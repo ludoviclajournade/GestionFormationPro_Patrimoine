@@ -23,6 +23,7 @@ import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.ws.rs.POST;
 import javax.ws.rs.PathParam;
+import javax.ws.rs.QueryParam;
 import javax.xml.soap.SOAPException;
 import services.ServicePatrimoineLocal;
 
@@ -51,17 +52,67 @@ public class PatrimoineResource {
      * Retrieves representation of an instance of miagePatrimoine.PatrimoineResource
      * @return an instance of java.lang.String
      */
+    @Path("afficherPlan")
     @GET
-    //@Produces(MediaType.APPLICATION_JSON)
-    public String getJson(String id)  {
-        System.out.print(id);
+    @Produces(MediaType.APPLICATION_JSON)
+    public String afficherPlan() {
         //TODO return proper representation object
-        //throw new UnsupportedOperationException();
-        //return Response.status(Response.Status.NOT_FOUND).build();
-        
         return patri.RenvoisPlan();
     }
+    
+    @Path("afficherSalle")
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    public String afficherSalle() {
+        //TODO return proper representation object
+        return patri.RenvoisSalle();
+    }
 
+    @Path("SupprimerSalle")
+    @POST
+    @Produces(MediaType.APPLICATION_JSON)
+    public String SupprimerSalle(@QueryParam("idSalle") int id) {
+        
+        return patri.SupprimerSalle(id);        
+    }
+    
+    @Path("SupprimerSallePlan")
+    @POST
+    @Produces(MediaType.APPLICATION_JSON)
+    public String SupprimerSallePlan(@QueryParam("idPlan") int id) {
+       
+        return patri.SupprimerSallePlan(id);        
+    }
+    
+    
+    @Path("AjoutSalle")
+    @POST
+    @Consumes(MediaType.APPLICATION_JSON)
+    public String AjouterSalle(String content) {
+        //return Response.ok(gson.toJson(patri.ajouterSalle(id))).build();
+        //System.out.print(id);
+        return patri.ajouterSalle(content);        
+    }
+    
+    @Path("AjoutPlan")
+    @POST
+    @Consumes(MediaType.APPLICATION_JSON)
+    public String ajouterSallePan(String content) {
+       
+        return patri.ajouterSallePan(content);        
+    }
+    
+    @Path("changerStatut")
+    @POST
+    @Consumes(MediaType.APPLICATION_JSON)
+    public String changerDate(String content) {
+    
+        return patri.changerStatut(content);        
+    }
+    
+    
+    
+    
     /**
      * PUT method for updating or creating an instance of PatrimoineResource
      * @param content representation for the resource
@@ -78,33 +129,7 @@ public class PatrimoineResource {
     
   
     
-    //@Path("/post")
-    
-    //@Consumes(MediaType.APPLICATION_JSON)
-    //@Produces(MediaType.APPLICATION_JSON)
-    //@Path("/post")
-    //@PathParam("id") String id
-    @POST
-    public String AjouterSalle(String id) {
-        //return Response.ok(gson.toJson(patri.ajouterSalle(id))).build();
-        System.out.print(id);
-        return patri.ajouterSalle(id) ;        
-    }
-    /*
-    @POST
-    public String SupprimerRes(String id) {
-        //return Response.ok(gson.toJson(patri.ajouterSalle(id))).build();
-        System.out.print(id);
-        return patri.SupprimerRes(id);
-    }
-   
-    @POST
-    public String changerStatut(String id, String statut) {
-        //return Response.ok(gson.toJson(patri.ajouterSalle(id))).build();
-        System.out.print(id);
-        return patri.changerStatut(id, statut);
-    }
-    */
+
     private ServicePatrimoineLocal lookupServicesBourseLocal() {
         try {
             javax.naming.Context c = new InitialContext();
