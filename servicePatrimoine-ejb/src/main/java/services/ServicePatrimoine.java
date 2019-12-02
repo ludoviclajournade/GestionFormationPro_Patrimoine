@@ -7,13 +7,11 @@ package services;
 
 //import metier.gestionPatrimoine;
 import com.google.gson.Gson;
-import com.google.gson.JsonSyntaxException;
+import entitie.Salle;
 import entitie.planning;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import java.util.ArrayList;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
-import javax.xml.soap.SOAPException;
 import metier.gestionPatrimoineLocal;
 
 /**
@@ -65,14 +63,13 @@ public class ServicePatrimoine implements ServicePatrimoineLocal {
     }
     
     @Override
-    public String RenvoisPlan() {
-        return this.gestionpatrimoine.RenvoisPlan();
+    public ArrayList<planning> renvoiPlan() {
+        return this.gestionpatrimoine.renvoiPlan();
     }
     
     @Override
-    public String RenvoisSalle(){
-        return this.gestionpatrimoine.RenvoisSalle();
-    }
-    
+    public ArrayList<Salle> renvoiSalle(){
+        return this.gestionpatrimoine.renvoiSalle();
+    }   
     
 }

@@ -16,6 +16,7 @@ import javax.enterprise.context.RequestScoped;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.google.gson.JsonSyntaxException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -39,15 +40,19 @@ public class PatrimoineResource {
 
     @Context
     private UriInfo context;
+    ServicePatrimoineLocal patri;
+    private Gson gson;
 
     /**
      * Creates a new instance of PatrimoineResource
      */
     public PatrimoineResource() {
+        patri = lookupServicesBourseLocal();
+        GsonBuilder gsonBuilder = new GsonBuilder();
+        gson = gsonBuilder.create();
     }
 
-    ServicePatrimoineLocal patri = lookupServicesBourseLocal(); ;
-    private Gson gson;
+    
     /**
      * Retrieves representation of an instance of miagePatrimoine.PatrimoineResource
      * @return an instance of java.lang.String
@@ -56,16 +61,14 @@ public class PatrimoineResource {
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     public String afficherPlan() {
-        //TODO return proper representation object
-        return patri.RenvoisPlan();
+        return this.gson.toJson(this.patri.renvoiPlan());
     }
     
     @Path("afficherSalle")
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     public String afficherSalle() {
-        //TODO return proper representation object
-        return patri.RenvoisSalle();
+        return this.gson.toJson(this.patri.renvoiSalle());
     }
 
     @Path("SupprimerSalle")

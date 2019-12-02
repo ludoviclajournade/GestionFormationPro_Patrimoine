@@ -7,9 +7,7 @@ package metier;
 
 import com.google.gson.Gson;
 import entitie.Salle;
-import javax.ejb.EJB;
 import javax.ejb.Stateless;
-import javax.xml.soap.SOAPException;
 import entitie.planning;
 import java.util.ArrayList;
 
@@ -134,24 +132,34 @@ public class gestionPatrimoine implements gestionPatrimoineLocal {
         return "Salle bien supprimé";
     }
     
-    @Override
-    public String RenvoisPlan(){
+    /*@Override
+    public String renvoiPlan(){
         String res = "";
         String Newligne=System.getProperty("line.separator"); 
         for(int i = 0; i<monPlanning.size();i++){
                 res = res + monPlanning.get(i).toString() + Newligne;
             }
         return res;
-    }
+    }*/
     
     @Override
-    public String RenvoisSalle(){
+    public ArrayList<planning> renvoiPlan(){
+        return this.monPlanning;
+    }
+    
+   /* @Override
+    public String renvoiSalle(){
         String res = "";
         String Newligne=System.getProperty("line.separator"); 
         for(int i = 0; i<mesSalles.size();i++){
                 res = res + mesSalles.get(i).toString() + Newligne;
             }
         return res;
+    }*/
+    
+    @Override
+    public ArrayList<Salle> renvoiSalle(){
+        return this.mesSalles;
     }
 }
 

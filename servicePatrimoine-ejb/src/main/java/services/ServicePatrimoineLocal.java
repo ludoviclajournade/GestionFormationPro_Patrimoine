@@ -5,8 +5,10 @@
  */
 package services;
 
+import entitie.Salle;
+import entitie.planning;
+import java.util.ArrayList;
 import javax.ejb.Local;
-import javax.xml.soap.SOAPException;
 
 /**
  *
@@ -22,9 +24,9 @@ public interface ServicePatrimoineLocal {
     
     public String changerStatut(String content) ;
     
-    public String RenvoisPlan();
+    public ArrayList<planning> renvoiPlan();
     
-    public String RenvoisSalle();
+    public ArrayList<Salle> renvoiSalle();
     
     public String SupprimerSalle(int id);
     

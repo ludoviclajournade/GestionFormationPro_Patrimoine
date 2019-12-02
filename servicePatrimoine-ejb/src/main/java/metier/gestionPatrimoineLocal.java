@@ -5,6 +5,9 @@
  */
 package metier;
 
+import entitie.Salle;
+import entitie.planning;
+import java.util.ArrayList;
 import javax.ejb.Local;
 import javax.xml.soap.SOAPException;
 
@@ -17,16 +20,16 @@ public interface gestionPatrimoineLocal {
     
     public String ajouterSalle(String content);
     
-     public String ajouterSallePan(String content);
+    public String ajouterSallePan(String content);
     
     public String changerStatut(String content);
     
-     public String SupprimerSallePlan(int id);
+    public String SupprimerSallePlan(int id);
     
     public String SupprimerSalle(int id);
     
-    public String RenvoisPlan();
+    public ArrayList<planning> renvoiPlan();
     
-    public String RenvoisSalle();
+    public ArrayList<Salle> renvoiSalle();
     
 }
