@@ -6,8 +6,9 @@
 package metier;
 
 import entitie.Salle;
-import entitie.planning;
+import entitie.Planning;
 import java.util.ArrayList;
+import java.util.HashMap;
 import javax.ejb.Local;
 import javax.xml.soap.SOAPException;
 
@@ -16,7 +17,7 @@ import javax.xml.soap.SOAPException;
  * @author alban
  */
 @Local
-public interface gestionPatrimoineLocal {
+public interface GestionPatrimoineLocal {
     
     public String ajouterSalle(String content);
     
@@ -28,8 +29,10 @@ public interface gestionPatrimoineLocal {
     
     public String SupprimerSalle(int id);
     
-    public ArrayList<planning> renvoiPlan();
+    public HashMap<Integer, Planning> renvoiPlan();
     
-    public ArrayList<Salle> renvoiSalle();
+    public HashMap<Integer, Salle> renvoiSalle();
+    
+     public ArrayList<Planning> renvoiPlanningSalles();
     
 }

@@ -11,7 +11,7 @@ import javax.persistence.Column;
  *
  * @author alban
  */
-public class planning {
+public class Planning {
 
    
     private int idSalle;
@@ -20,7 +20,7 @@ public class planning {
     private String dateDeb;
     private String dateFin;
 
-    public planning(int idSalle, int idFormation, String statut, String dateDeb, String dateFin) {
+    public Planning(int idSalle, int idFormation, String statut, String dateDeb, String dateFin) {
         this.idSalle = idSalle;
         this.idFormation = idFormation;
         this.statut = statut;
@@ -28,7 +28,7 @@ public class planning {
         this.dateFin = dateFin;
     }
 
-    public planning(int idSalle, String statut, String dateDeb, String dateFin) {
+    public Planning(int idSalle, String statut, String dateDeb, String dateFin) {
         this.idSalle = idSalle;
         this.statut = statut;
         this.dateDeb = dateDeb;

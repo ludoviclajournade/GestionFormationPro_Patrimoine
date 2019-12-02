@@ -6,8 +6,9 @@
 package services;
 
 import entitie.Salle;
-import entitie.planning;
+import entitie.Planning;
 import java.util.ArrayList;
+import java.util.HashMap;
 import javax.ejb.Local;
 
 /**
@@ -24,12 +25,14 @@ public interface ServicePatrimoineLocal {
     
     public String changerStatut(String content) ;
     
-    public ArrayList<planning> renvoiPlan();
+    public HashMap<Integer, Planning> renvoiPlan();
     
-    public ArrayList<Salle> renvoiSalle();
+    public HashMap<Integer, Salle> renvoiSalle();
     
     public String SupprimerSalle(int id);
     
     public String ajouterSallePan(String content);
+    
+    public ArrayList<Planning> renvoiPlanningSalles();
     
 }

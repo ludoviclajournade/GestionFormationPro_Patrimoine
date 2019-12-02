@@ -8,15 +8,16 @@ package metier;
 import com.google.gson.Gson;
 import entitie.Salle;
 import javax.ejb.Stateless;
-import entitie.planning;
+import entitie.Planning;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 /**
  *
  * @author alban
  */
 @Stateless
-public class gestionPatrimoine implements gestionPatrimoineLocal {
+public class GestionPatrimoine implements GestionPatrimoineLocal {
 
     // Add business logic below. (Right-click in editor and choose
     // "Insert Code > Add Business Method")
@@ -24,29 +25,29 @@ public class gestionPatrimoine implements gestionPatrimoineLocal {
    
     private Gson gson;
     
-    public gestionPatrimoine() {
+    public GestionPatrimoine() {
         this.gson = new Gson();
     }
 
-    private ArrayList<planning> monPlanning = initPlan();
-    private ArrayList<Salle> mesSalles = initSalle();
+    private HashMap<Integer, Planning> monPlanning = initPlan();
+    private HashMap<Integer, Salle> mesSalles = initSalle();
     
-    private ArrayList<planning> initPlan(){
-         ArrayList<planning> monPlanning = new ArrayList<planning>();
-         planning pla1 = new planning(1,"indisponible","01/01/2020","01/09/2020");
-         planning pla2 = new planning(2,2,"affectée","01/01/2020","01/04/2020");
-         planning pla3 = new planning(3,3,"pressentie","09/01/2020","14/01/2020");
-         planning pla4 = new planning(4,4,"affectée","01/01/2020","01/12/2020");
-         monPlanning.add(pla1);
-         monPlanning.add(pla2);
-         monPlanning.add(pla3);
-         monPlanning.add(pla4);
+    private HashMap<Integer, Planning> initPlan(){
+         HashMap<Integer, Planning> monPlanning = new HashMap<>();
+         Planning pla1 = new Planning(1,"indisponible","01/01/2020","01/09/2020");
+         Planning pla2 = new Planning(2,2,"affectée","01/01/2020","01/04/2020");
+         Planning pla3 = new Planning(3,3,"pressentie","09/01/2020","14/01/2020");
+         Planning pla4 = new Planning(4,4,"affectée","01/01/2020","01/12/2020");
+         monPlanning.put(pla1.getIdSalle(),pla1);
+         monPlanning.put(pla2.getIdSalle(), pla2);
+         monPlanning.put(pla3.getIdSalle(), pla3);
+         monPlanning.put(pla4.getIdSalle(), pla4);
          
          return monPlanning;
     }
     
-    private ArrayList<Salle> initSalle(){
-        ArrayList<Salle> mesSalles = new ArrayList<Salle>();
+    private HashMap<Integer, Salle> initSalle(){
+        HashMap<Integer, Salle> mesSalles = new HashMap<>();
         ArrayList<String> equ = new ArrayList<String>();
         
         Salle S1 = new Salle(1,"Rocher",equ);
@@ -61,11 +62,13 @@ public class gestionPatrimoine implements gestionPatrimoineLocal {
         
         Salle S3 = new Salle(3,"Duchar",equ);
         Salle S4 = new Salle(4,"Saufane",equ);
+        Salle S5 = new Salle(5,"Coucou",equ);
         
-        mesSalles.add(S1);
-        mesSalles.add(S2);
-        mesSalles.add(S3);
-        mesSalles.add(S4);
+        mesSalles.put(S1.getId(), S1);
+        mesSalles.put(S2.getId(), S2);
+        mesSalles.put(S3.getId(), S3);
+        mesSalles.put(S4.getId(),S4);
+        mesSalles.put(S5.getId(),S5);
          
         return mesSalles;
     }
@@ -74,20 +77,20 @@ public class gestionPatrimoine implements gestionPatrimoineLocal {
     public String ajouterSalle(String content){
         Salle S = this.gson.fromJson(content, Salle.class);
         Salle S2 = new Salle(mesSalles.size()+1, S.getName(),S.getEquipement());
-        mesSalles.add(S2);
+        mesSalles.put(S2.getId(), S2);
         return S2.toString();
     }
     
     @Override
     public String ajouterSallePan(String content){
-        planning pla = this.gson.fromJson(content, planning.class);
-        monPlanning.add(pla);
+        Planning pla = this.gson.fromJson(content, Planning.class);
+        monPlanning.put(pla.getIdSalle(), pla);
         return pla.toString();
     }
     
     @Override
     public String changerStatut(String content) {
-        planning pla = this.gson.fromJson(content, planning.class);
+        Planning pla = this.gson.fromJson(content, Planning.class);
         
         System.out.println(pla.toString());
         String res = "";
@@ -116,7 +119,7 @@ public class gestionPatrimoine implements gestionPatrimoineLocal {
                 monPlanning.remove(i);
             }
         }
-        return "Salle bien enlevé du planning";
+        return "Salle bien enlevée du planning";
     }
     
     @Override
@@ -129,7 +132,7 @@ public class gestionPatrimoine implements gestionPatrimoineLocal {
             }
         }
         
-        return "Salle bien supprimé";
+        return "Salle bien supprimée";
     }
     
     /*@Override
@@ -143,7 +146,7 @@ public class gestionPatrimoine implements gestionPatrimoineLocal {
     }*/
     
     @Override
-    public ArrayList<planning> renvoiPlan(){
+    public HashMap<Integer, Planning> renvoiPlan(){
         return this.monPlanning;
     }
     
@@ -158,8 +161,23 @@ public class gestionPatrimoine implements gestionPatrimoineLocal {
     }*/
     
     @Override
-    public ArrayList<Salle> renvoiSalle(){
+    public HashMap<Integer, Salle> renvoiSalle(){
         return this.mesSalles;
+    }
+    
+    @Override
+    public ArrayList<Planning> renvoiPlanningSalles() {
+        ArrayList<Planning> planning = new ArrayList<>();
+        for(Salle s : this.mesSalles.values()) {
+           if(!this.monPlanning.containsKey(s.getId())) {
+               Planning p = new Planning(s.getId(), "disponible", null, null);
+               planning.add(p);
+           }
+           else {
+               planning.add(this.monPlanning.get(s.getId()));
+           }
+        }
+        return planning;
     }
 }
 

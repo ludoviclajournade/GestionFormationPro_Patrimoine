@@ -70,6 +70,13 @@ public class PatrimoineResource {
     public String afficherSalle() {
         return this.gson.toJson(this.patri.renvoiSalle());
     }
+    
+    @Path("afficherSalles")
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    public String afficherPlanningSalles() {
+        return this.gson.toJson(this.patri.renvoiPlanningSalles());
+    }
 
     @Path("SupprimerSalle")
     @POST
@@ -101,7 +108,6 @@ public class PatrimoineResource {
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
     public String ajouterSallePan(String content) {
-       
         return patri.ajouterSallePan(content);        
     }
     
