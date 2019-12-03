@@ -14,18 +14,14 @@ import javax.ws.rs.Path;
 import javax.ws.rs.PUT;
 import javax.enterprise.context.RequestScoped;
 import javax.ws.rs.core.MediaType;
-import javax.ws.rs.core.Response;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import com.google.gson.JsonSyntaxException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.ws.rs.POST;
-import javax.ws.rs.PathParam;
 import javax.ws.rs.QueryParam;
-import javax.xml.soap.SOAPException;
 import services.ServicePatrimoineLocal;
 
 
@@ -81,7 +77,7 @@ public class PatrimoineResource {
     @Path("SupprimerSalle")
     @POST
     @Produces(MediaType.APPLICATION_JSON)
-    public String SupprimerSalle(@QueryParam("idSalle") int id) {
+    public String supprimerSalle(@QueryParam("idSalle") int id) {
         
         return patri.SupprimerSalle(id);        
     }
@@ -89,8 +85,7 @@ public class PatrimoineResource {
     @Path("SupprimerSallePlan")
     @POST
     @Produces(MediaType.APPLICATION_JSON)
-    public String SupprimerSallePlan(@QueryParam("idPlan") int id) {
-       
+    public String supprimerSallePlan(@QueryParam("idPlan") int id) {
         return patri.SupprimerSallePlan(id);        
     }
     
@@ -98,29 +93,26 @@ public class PatrimoineResource {
     @Path("AjoutSalle")
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
-    public String AjouterSalle(String content) {
-        //return Response.ok(gson.toJson(patri.ajouterSalle(id))).build();
-        //System.out.print(id);
-        return patri.ajouterSalle(content);        
+    @Produces(MediaType.APPLICATION_JSON)
+    public String ajouterSalle(String content) {
+        return this.gson.toJson(patri.ajouterSalle(content));        
     }
     
     @Path("AjoutPlan")
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
     public String ajouterSallePan(String content) {
-        return patri.ajouterSallePan(content);        
+        return this.gson.toJson(patri.ajouterSallePan(content));        
     }
     
     @Path("changerStatut")
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
     public String changerDate(String content) {
-    
-        return patri.changerStatut(content);        
+        return this.gson.toJson(patri.changerStatut(content));        
     }
-    
-    
-    
+
     
     /**
      * PUT method for updating or creating an instance of PatrimoineResource
@@ -136,9 +128,6 @@ public class PatrimoineResource {
         return "testOK";
     }
     
-  
-    
-
     private ServicePatrimoineLocal lookupServicesBourseLocal() {
         try {
             javax.naming.Context c = new InitialContext();

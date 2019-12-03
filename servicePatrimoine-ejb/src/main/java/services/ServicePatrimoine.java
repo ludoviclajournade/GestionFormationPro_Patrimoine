@@ -40,16 +40,16 @@ public class ServicePatrimoine implements ServicePatrimoineLocal {
     }
     
     @Override
-    public String ajouterSalle(String content){
+    public Salle ajouterSalle(String content){
         return this.gestionpatrimoine.ajouterSalle(content);
     }
     @Override
-    public String ajouterSallePan(String content){
+    public Planning ajouterSallePan(String content){
         return this.gestionpatrimoine.ajouterSallePan(content);
     }
     
     @Override
-    public String changerStatut(String content){
+    public Planning changerStatut(String content){
         return this.gestionpatrimoine.changerStatut(content);
     }
     
@@ -64,7 +64,7 @@ public class ServicePatrimoine implements ServicePatrimoineLocal {
     }
     
     @Override
-    public HashMap<Integer, Planning> renvoiPlan() {
+    public ArrayList<Planning> renvoiPlan() {
         return this.gestionpatrimoine.renvoiPlan();
     }
     

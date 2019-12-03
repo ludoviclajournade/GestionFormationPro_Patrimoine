@@ -69,11 +69,7 @@ public class ModifResource {
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
     public String changerStatut(String content) {
-        //return Response.ok(gson.toJson(patri.ajouterSalle(id))).build();
-        System.out.print(content);
-        
-        return patri.changerStatut(content);
-        //return patri.changerStatut(content);
+        return this.gson.toJson(patri.changerStatut(content));
     }
     
     private ServicePatrimoineLocal lookupServicesBourseLocal() {

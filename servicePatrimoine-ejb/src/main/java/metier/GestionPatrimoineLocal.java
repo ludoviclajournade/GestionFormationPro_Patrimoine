@@ -10,7 +10,6 @@ import entitie.Planning;
 import java.util.ArrayList;
 import java.util.HashMap;
 import javax.ejb.Local;
-import javax.xml.soap.SOAPException;
 
 /**
  *
@@ -19,20 +18,20 @@ import javax.xml.soap.SOAPException;
 @Local
 public interface GestionPatrimoineLocal {
     
-    public String ajouterSalle(String content);
+    public Salle ajouterSalle(String content);
     
-    public String ajouterSallePan(String content);
+    public Planning ajouterSallePan(String content);
     
-    public String changerStatut(String content);
+    public Planning changerStatut(String content);
     
     public String SupprimerSallePlan(int id);
     
     public String SupprimerSalle(int id);
     
-    public HashMap<Integer, Planning> renvoiPlan();
+    public ArrayList<Planning> renvoiPlan();
     
     public HashMap<Integer, Salle> renvoiSalle();
     
-     public ArrayList<Planning> renvoiPlanningSalles();
+    public ArrayList<Planning> renvoiPlanningSalles();
     
 }
