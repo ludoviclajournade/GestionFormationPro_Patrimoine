@@ -68,6 +68,7 @@ public class ModifResource {
     
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
     public String changerStatut(String content) {
         return this.gson.toJson(patri.changerStatut(content));
     }

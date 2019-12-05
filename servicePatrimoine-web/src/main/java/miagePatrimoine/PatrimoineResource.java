@@ -49,10 +49,6 @@ public class PatrimoineResource {
     }
 
     
-    /**
-     * Retrieves representation of an instance of miagePatrimoine.PatrimoineResource
-     * @return an instance of java.lang.String
-     */
     @Path("afficherPlan")
     @GET
     @Produces(MediaType.APPLICATION_JSON)
@@ -67,7 +63,7 @@ public class PatrimoineResource {
         return this.gson.toJson(this.patri.renvoiSalle());
     }
     
-    @Path("afficherSalles")
+    @Path("afficherPlanSalles")
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     public String afficherPlanningSalles() {
@@ -79,14 +75,14 @@ public class PatrimoineResource {
     @Produces(MediaType.APPLICATION_JSON)
     public String supprimerSalle(@QueryParam("idSalle") int id) {
         
-        return patri.SupprimerSalle(id);        
+        return patri.supprimerSalle(id);        
     }
     
     @Path("SupprimerSallePlan")
     @POST
     @Produces(MediaType.APPLICATION_JSON)
-    public String supprimerSallePlan(@QueryParam("idPlan") int id) {
-        return patri.SupprimerSallePlan(id);        
+    public String supprimerSallePlan(@QueryParam("idSalle") int id, @QueryParam("dateDeb") String dateDeb) {
+        return patri.supprimerSallePlan(id, dateDeb);        
     }
     
     
@@ -109,7 +105,8 @@ public class PatrimoineResource {
     @Path("changerStatut")
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
-    public String changerDate(String content) {
+    @Produces(MediaType.APPLICATION_JSON)
+    public String changerStatut(String content) {
         return this.gson.toJson(patri.changerStatut(content));        
     }
 
@@ -121,10 +118,6 @@ public class PatrimoineResource {
     @PUT
     @Consumes(MediaType.APPLICATION_JSON)
     public String putJson(String content) {
-       // long id_sal;
-   
-       //planning p = gson.fromJson(content, planning.class)
-        //return Response.ok(gson.toJson(patri.ajouterSalle(content))).build();
         return "testOK";
     }
     

@@ -21,15 +21,15 @@ public interface ServicePatrimoineLocal {
     
     public Salle ajouterSalle(String content);
     
-    public String SupprimerSallePlan(int id);
+    public String supprimerSallePlan(int id, String dateDeb);
     
-    public Planning changerStatut(String content) ;
+    public String changerStatut(String content) ;
     
     public ArrayList<Planning> renvoiPlan();
     
     public HashMap<Integer, Salle> renvoiSalle();
     
-    public String SupprimerSalle(int id);
+    public String supprimerSalle(int id);
     
     public Planning ajouterSallePan(String content);
     

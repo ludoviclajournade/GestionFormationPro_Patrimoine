@@ -22,11 +22,11 @@ public interface GestionPatrimoineLocal {
     
     public Planning ajouterSallePan(String content);
     
-    public Planning changerStatut(String content);
+    public String changerStatut(String content);
     
-    public String SupprimerSallePlan(int id);
+    public String supprimerSallePlan(int id, String dateDeb);
     
-    public String SupprimerSalle(int id);
+    public String supprimerSalle(int id);
     
     public ArrayList<Planning> renvoiPlan();
     

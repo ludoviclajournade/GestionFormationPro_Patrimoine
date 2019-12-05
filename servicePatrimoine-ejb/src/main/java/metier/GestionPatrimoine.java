@@ -31,13 +31,15 @@ public class GestionPatrimoine implements GestionPatrimoineLocal {
     private ArrayList<Planning> initPlan(){
         ArrayList<Planning> monPlanning = new ArrayList<>();
         Planning pla1 = new Planning(1,"indisponible","01/01/2020","01/09/2020");
-        Planning pla2 = new Planning(2,2,"affectée","01/01/2020","01/04/2020");
+        Planning pla2 = new Planning(2,2,"affectee","01/01/2020","01/04/2020");
         Planning pla3 = new Planning(3,3,"pressentie","09/01/2020","14/01/2020");
-        Planning pla4 = new Planning(4,4,"affectée","01/01/2020","01/12/2020");
+        Planning pla4 = new Planning(4,4,"affectee","01/01/2020","01/12/2020");
+        Planning pla5 = new Planning(1,2,"affectee","10/01/2020","15/12/2020");
         monPlanning.add(pla1);
         monPlanning.add(pla2);
         monPlanning.add(pla3);
         monPlanning.add(pla4);
+        monPlanning.add(pla5);
          
         return monPlanning;
     }
@@ -85,41 +87,50 @@ public class GestionPatrimoine implements GestionPatrimoineLocal {
     }
     
     @Override
-    public Planning changerStatut(String content) {
+    public String changerStatut(String content) {
         Planning pla = this.gson.fromJson(content, Planning.class);       
-        Planning res = null;
+        String res = null;
+        Integer salle = null;
         
         for(int i = 0; i<monPlanning.size();i++){
-            if(monPlanning.get(i).getIdSalle() == pla.getIdSalle() && monPlanning.get(i).getIdFormation() == pla.getIdFormation()){
-                monPlanning.get(i).setStatut(pla.getStatut());
-                monPlanning.get(i).setDateDeb(pla.getDateDeb());
-                monPlanning.get(i).setDateFin(pla.getDateFin());
-                res = monPlanning.get(i);
-            }
-            if(monPlanning.get(i).getIdSalle() == pla.getIdSalle() && monPlanning.get(i).getIdFormation() == pla.getIdFormation() && pla.getStatut().equals("indisponible") ){
-                monPlanning.get(i).setStatut(pla.getStatut());
-                monPlanning.get(i).setDateDeb(pla.getDateDeb());
-                monPlanning.get(i).setDateFin(pla.getDateFin());
-                monPlanning.get(i).setIdFormation(0);
-                res = monPlanning.get(i);
+            if(monPlanning.get(i).getIdSalle() == pla.getIdSalle()) {
+                salle = pla.getIdSalle();
+                if(monPlanning.get(i).getDateDeb().equals(pla.getDateDeb())){
+                   monPlanning.get(i).setStatut(pla.getStatut());
+                   monPlanning.get(i).setIdFormation(pla.getIdFormation());
+                   monPlanning.get(i).setDateFin(pla.getDateFin());
+
+                   if(pla.getStatut().equals("indisponible"))
+                       monPlanning.get(i).setIdFormation(null);
+
+                   res = "Mise a jour de la salle reussie.";
+               }
+            }     
+        }
+        
+        if(salle == null)
+            res = "Salle non existante dans le planning";
+        else if(salle != null && res == null)
+            res = "Reservation non existante dans le planning";
+        
+        return res;
+    }
+    
+    @Override
+    public String supprimerSallePlan(int id, String dateDeb){
+        String res = "Salle non existante dans le planning";
+        for(int i = 0; i<monPlanning.size();i++){
+            if (monPlanning.get(i).getIdSalle() == id && monPlanning.get(i).getDateDeb().equals(dateDeb)){
+                monPlanning.remove(i);
+                res = "Salle bien enlevee du planning";
             }
         }
         return res;
     }
     
     @Override
-    public String SupprimerSallePlan(int id){
-        for(int i = 0; i<monPlanning.size();i++){
-            if (monPlanning.get(i).getIdSalle() == id){
-                monPlanning.remove(i);
-            }
-        }
-        return "Salle bien enlevée du planning";
-    }
-    
-    @Override
-    public String SupprimerSalle(int id){
-        String res = "Salle bien supprimée";
+    public String supprimerSalle(int id){
+        String res = "Salle bien supprimee";
         if(!this.mesSalles.containsKey(id))
             res = "Salle inexistante";
         else 
@@ -127,31 +138,11 @@ public class GestionPatrimoine implements GestionPatrimoineLocal {
         return res;
     }
     
-    /*@Override
-    public String renvoiPlan(){
-        String res = "";
-        String Newligne=System.getProperty("line.separator"); 
-        for(int i = 0; i<monPlanning.size();i++){
-                res = res + monPlanning.get(i).toString() + Newligne;
-            }
-        return res;
-    }*/
-    
     @Override
     public ArrayList<Planning> renvoiPlan(){
         return this.monPlanning;
     }
-    
-   /* @Override
-    public String renvoiSalle(){
-        String res = "";
-        String Newligne=System.getProperty("line.separator"); 
-        for(int i = 0; i<mesSalles.size();i++){
-                res = res + mesSalles.get(i).toString() + Newligne;
-            }
-        return res;
-    }*/
-    
+
     @Override
     public HashMap<Integer, Salle> renvoiSalle(){
         return this.mesSalles;
@@ -163,15 +154,15 @@ public class GestionPatrimoine implements GestionPatrimoineLocal {
         Planning plan = null;
         for(Salle s : this.mesSalles.values()) {
             for(Planning p : this.monPlanning) {
-                if(p.getIdSalle() == s.getId())
+                if(p.getIdSalle() == s.getId()) {
                     plan = p;
+                    planning.add(plan);
+                }
             }
+            //si la salle n'est pas dans le planning
             if(plan == null) {
                 Planning p = new Planning(s.getId(), "disponible", null, null);
                 planning.add(p);
-            }
-            else {
-                planning.add(plan);
             }
             plan = null;
         }

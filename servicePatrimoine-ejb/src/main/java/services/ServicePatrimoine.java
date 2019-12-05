@@ -49,18 +49,18 @@ public class ServicePatrimoine implements ServicePatrimoineLocal {
     }
     
     @Override
-    public Planning changerStatut(String content){
+    public String changerStatut(String content){
         return this.gestionpatrimoine.changerStatut(content);
     }
     
     @Override
-    public String SupprimerSalle(int id){
-        return this.gestionpatrimoine.SupprimerSalle(id);
+    public String supprimerSalle(int id){
+        return this.gestionpatrimoine.supprimerSalle(id);
     }
     
     @Override
-    public String SupprimerSallePlan(int id){
-        return this.gestionpatrimoine.SupprimerSallePlan(id);
+    public String supprimerSallePlan(int id, String dateDeb){
+        return this.gestionpatrimoine.supprimerSallePlan(id, dateDeb);
     }
     
     @Override
