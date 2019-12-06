@@ -30,11 +30,16 @@ public class GestionPatrimoine implements GestionPatrimoineLocal {
     
     private ArrayList<Planning> initPlan(){
         ArrayList<Planning> monPlanning = new ArrayList<>();
-        Planning pla1 = new Planning(1,"indisponible","01/01/2020","01/09/2020");
+        /*Planning pla1 = new Planning(1,"indisponible","01/01/2020","01/09/2020");
         Planning pla2 = new Planning(2,2,"affectee","01/01/2020","01/04/2020");
         Planning pla3 = new Planning(3,3,"pressentie","09/01/2020","14/01/2020");
         Planning pla4 = new Planning(4,4,"affectee","01/01/2020","01/12/2020");
-        Planning pla5 = new Planning(1,2,"affectee","10/01/2020","15/12/2020");
+        Planning pla5 = new Planning(1,2,"affectee","10/01/2020","15/12/2020");*/
+        Planning pla1 = new Planning(1,"indisponible","01/01/2020","01/09/2020");
+        Planning pla2 = new Planning(2,2,"affecte","01/01/2020","04/01/2020");
+        Planning pla3 = new Planning(3,3,"pressenti","11/02/2020","16/02/2020");
+        Planning pla4 = new Planning(4,4,"affecte","25/10/2020","30/10/2020");
+        Planning pla5 = new Planning(1,2,"affecte","10/01/2020","15/12/2020");
         monPlanning.add(pla1);
         monPlanning.add(pla2);
         monPlanning.add(pla3);
